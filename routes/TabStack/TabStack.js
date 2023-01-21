@@ -99,12 +99,13 @@ const TabNavigator = () => {
 };
 
 const BigTabButton = (props) => {
+  console.log('props', props)
   return (
     <TouchableOpacity
-      style={styles.bigTabButton}
+      style={props.accessibilityState?.selected === true ? styles.bigTabButton : styles.notTabButton}
       onPress={() => props.onPress()}
     >
-      <Entypo name="plus" size={60} color="#fff" />
+      <Entypo name="plus" size={54} color="#fff" />
     </TouchableOpacity>
   );
 };
@@ -118,19 +119,41 @@ const styles = StyleSheet.create({
   bigTabButton: {
     alignItems: "center",
     justifyContent: "center",
-    width: 90,
-    height: 90,
+    width: 80,
+    height: 80,
     backgroundColor: "#ccc",
     borderRadius: 50,
     marginTop: -30,
     backgroundColor: "#79007B",
-    borderWidth: 5,
+    // borderWidth: 5,
     borderColor: "#f7f7f7",
+    elevation: 7,
+    shadowOffset: { width: 2, height: 5 },
+    shadowColor: "#ccc",
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
   },
   bigTabButtonText: {
     fontSize: 20,
     color: "#000",
   },
+  notTabButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 80,
+    height: 80,
+    backgroundColor: "#ccc",
+    borderRadius: 50,
+    marginTop: -30,
+    backgroundColor: "#aaa",
+    // borderWidth: 5,
+    borderColor: "#f7f7f7",
+    elevation: 7,
+    shadowOffset: { width: 2, height: 5 },
+    shadowColor: "#ccc",
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+  }
 });
 
 export default TabNavigator;

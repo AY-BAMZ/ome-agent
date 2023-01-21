@@ -60,6 +60,7 @@ export const globalStyles = StyleSheet.create({
     borderRadius: 8,
     borderColor: "#dddddd",
     borderWidth: 1,
+    fontSize: 18,
     marginVertical: 4,
     // textAlign: 'center'
   },
@@ -69,6 +70,7 @@ export const globalStyles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     height: 40,
+    fontSize: 18,
     paddingHorizontal: 15,
     borderRadius: 8,
     borderColor: "#dddddd",
@@ -77,10 +79,10 @@ export const globalStyles = StyleSheet.create({
     // textAlign: 'center'
   },
   label: {
-    fontFamily: "outfit-regular",
-    color: "#2B2A30",
-    fontSize: 14,
-    marginTop: 8
+    fontFamily: "outfit-medium",
+    color: "#777",
+    fontSize: 18,
+    marginTop: 8,
   },
   inputTwo: {
     maxWidth: "100%",
@@ -91,6 +93,7 @@ export const globalStyles = StyleSheet.create({
     paddingHorizontal: 15,
     borderRadius: 8,
     marginVertical: 12,
+    fontSize: 18,
     textAlign: 'center',
     borderColor: "#dddddd",
     borderWidth: 1,
