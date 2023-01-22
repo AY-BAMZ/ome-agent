@@ -99,7 +99,6 @@ const TabNavigator = () => {
 };
 
 const BigTabButton = (props) => {
-  console.log('props', props)
   return (
     <TouchableOpacity
       style={props.accessibilityState?.selected === true ? styles.bigTabButton : styles.notTabButton}
