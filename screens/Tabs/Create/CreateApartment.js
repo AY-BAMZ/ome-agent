@@ -4,11 +4,13 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
 import React, { createRef, useState } from "react";
 import { globalStyles } from "../../../styles/global";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import * as ImagePicker from "expo-image-picker";
 
 export default function CreateApartment() {
   const [title, setTitle] = useState("");
@@ -18,6 +20,7 @@ export default function CreateApartment() {
   const [bedrooms, setBedrooms] = useState("");
   const [toilets, setToilets] = useState("");
   const [size, setSize] = useState("");
+  const [images, setImages] = useState([]);
 
   const categoryRef = createRef();
   const selectTypeRef = createRef();
@@ -25,6 +28,26 @@ export default function CreateApartment() {
   const bedroomsRef = createRef();
   const toiletsRef = createRef();
   const sizeRef = createRef();
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        // allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+        allowsMultipleSelection: true,
+        selectionLimit: 5,
+      });
+
+      
+      // console.log("images", result.assets);
+     
+    if (!result.canceled) {
+      setImages([...images, ...result.uri]);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <KeyboardAvoidingView
@@ -140,6 +163,9 @@ export default function CreateApartment() {
             blurOnSubmit={false}
           />
         </TouchableWithoutFeedback>
+        <TouchableOpacity style={globalStyles.button} onPress={pickImage}>
+          <Text style={globalStyles.buttonText}>Choose Image</Text>
+        </TouchableOpacity>
       </KeyboardAvoidingView>
     </View>
   );
