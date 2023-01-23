@@ -1,4 +1,6 @@
 import {
+  FlatList,
+  Image,
   Keyboard,
   KeyboardAvoidingView,
   StyleSheet,
@@ -11,6 +13,7 @@ import React, { createRef, useState } from "react";
 import { globalStyles } from "../../../styles/global";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function CreateApartment() {
   const [title, setTitle] = useState("");
@@ -32,20 +35,23 @@ export default function CreateApartment() {
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        // allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-        allowsMultipleSelection: true,
-        selectionLimit: 5,
-      });
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      // allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+      allowsMultipleSelection: true,
+      selectionLimit: 5,
+    });
 
-      
-      // console.log("images", result.assets);
-     
+    let data = result.assets.map((item) => item.uri);
     if (!result.canceled) {
-      setImages([...images, ...result.uri]);
+      setImages([...images, ...data]);
     }
+  };
+
+  const handleDeleteImages = (index) => {
+    images.splice(index, 1);
+    setImages([...images]);
   };
 
   return (
@@ -157,15 +163,35 @@ export default function CreateApartment() {
             keyboardType="text"
             onChangeText={(size) => setSize(size)}
             returnKeyType="next"
-            // onSubmitEditing={() =>
-            //   sizeRef.current && sizeRef.current.focus()
-            // }
             blurOnSubmit={false}
           />
         </TouchableWithoutFeedback>
-        <TouchableOpacity style={globalStyles.button} onPress={pickImage}>
-          <Text style={globalStyles.buttonText}>Choose Image</Text>
-        </TouchableOpacity>
+        <View>
+          <FlatList
+            style={styles.imageList}
+            data={images}
+            horizontal={true}
+            renderItem={({ item, index }) => {
+              return (
+                <TouchableOpacity>
+                  <Image style={styles.image} source={{ url: item }} />
+                  <TouchableOpacity
+                    key={index}
+                    onPress={() => handleDeleteImages(index)}
+                    style={styles.cancelImage}
+                  >
+                    <Ionicons name="close" size={18} color="#fff" />
+                  </TouchableOpacity>
+                </TouchableOpacity>
+              );
+            }}
+          />
+        </View>
+        <View style={styles.media}>
+          <TouchableOpacity style={globalStyles.button} onPress={pickImage}>
+            <Text style={globalStyles.buttonText}>Choose Image</Text>
+          </TouchableOpacity>
+        </View>
       </KeyboardAvoidingView>
     </View>
   );
@@ -180,5 +206,27 @@ const styles = StyleSheet.create({
   },
   body: {
     marginHorizontal: 20,
+  },
+  image: {
+    width: 100,
+    height: 100,
+    marginRight: 10,
+    borderRadius: 12,
+  },
+  media: {
+    marginHorizontal: 20,
+  },
+  cancelImage: {
+    position: "absolute",
+    padding: 6,
+    backgroundColor: "#00000060",
+    borderRadius: "50%",
+    marginLeft: 78,
+    marginTop: -8,
+    zIndex: 100,
+  },
+  imageList: {
+    paddingTop: 16,
+    paddingHorizontal: 20,
   },
 });
