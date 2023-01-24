@@ -65,7 +65,7 @@ export default function CreateApartment() {
           }}
           style={styles.body}
         >
-          <Text style={globalStyles.pageText}>CreateApartment</Text>
+          <Text style={globalStyles.pageText}>Create Apartment</Text>
           <Text style={globalStyles.label}>Title</Text>
           <TextInput
             style={globalStyles.input}
