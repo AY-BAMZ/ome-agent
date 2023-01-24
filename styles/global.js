@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+
+const customWidth = Dimensions.get("window").width;
 
 export const globalStyles = StyleSheet.create({
   page: {
@@ -95,8 +97,6 @@ export const globalStyles = StyleSheet.create({
     marginVertical: 12,
     fontSize: 18,
     textAlign: 'center',
-    borderColor: "#dddddd",
-    borderWidth: 1,
   },
   textOne: {
     fontFamily: "outfit-bold",
@@ -163,8 +163,10 @@ export const globalStyles = StyleSheet.create({
     paddingHorizontal: 2,
     borderRadius: 50,
     marginVertical: 12,
+    marginHorizontal: 20,
     paddingLeft: 10,
-    marginTop: 20
+    borderColor: "#dddddd",
+    borderWidth: 1,
   },
   error: {
     color: "#ff0000",
@@ -178,5 +180,12 @@ export const globalStyles = StyleSheet.create({
   },
   noError: {
     display: "none"
+  },
+  hr: {
+    marginHorizontal: 20,
+    height: 1,
+    width: customWidth - 40,
+    backgroundColor: "#ddd",
+    marginVertical: 12
   },
 });
