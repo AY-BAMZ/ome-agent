@@ -87,7 +87,7 @@ export const globalStyles = StyleSheet.create({
     marginTop: 8,
   },
   inputTwo: {
-    maxWidth: "100%",
+    maxWidth: "80%",
     backgroundColor: "#fff",
     flexDirection: "row",
     alignItems: "center",

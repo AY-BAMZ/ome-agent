@@ -33,5 +33,21 @@ const styles = StyleSheet.create({
   },
   title: {
     marginHorizontal: 20,
-  }
+  },
+  inputArea: {
+    // minWidth: "100%",
+    backgroundColor: "#fff",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    height: 44,
+    paddingHorizontal: 2,
+    borderRadius: 50,
+    marginVertical: 12,
+    paddingLeft: 10,
+    marginTop: 20,
+    borderColor: "#dddddd",
+    borderWidth: 1,
+    marginHorizontal: 20,
+  },
 })
