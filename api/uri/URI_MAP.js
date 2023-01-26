@@ -1,4 +1,4 @@
-const BASE_URL = "https://rentrite.up.railway.app/";
+const BASE_URL = "http://rentrite.herokuapp.com/";
 
 
 const URI_MAP = {
