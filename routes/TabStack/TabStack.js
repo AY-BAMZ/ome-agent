@@ -10,6 +10,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome } from '@expo/vector-icons';
+import Header from "../../screens/Header";
+import ApartmentStack from "./ApartmentStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -40,7 +42,7 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator {...{ screenOptions, sceneContainerStyle }}>
       <Tab.Screen
-        name="Apartments"
+        name="ApartmentStack"
         options={{
           tabBarIcon: ({ color, size, focused }) =>
             focused ? (
@@ -48,9 +50,10 @@ const TabNavigator = () => {
             ) : (
               <MaterialIcons name="apartment" size={size} color={color} />
             ),
-          headerShown: false,
+          // headerShown: true,
+          // header: () => <Header title={'Apartments'}/>
         }}
-        component={Apartments}
+        component={ApartmentStack}
       />
       <Tab.Screen
         name="Inbox"

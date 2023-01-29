@@ -7,6 +7,7 @@ import * as Font from "expo-font";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import MainNav from "./routes/MainStack";
 import AuthProvider from "./api/auth/AuthContext";
+import HouseProvider from "./context/HouseContext";
 
 const getFonts = () =>
   Font.loadAsync({
@@ -25,13 +26,18 @@ export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   if (fontsLoaded) {
     return (
+      <>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <PaperProvider>
           <AuthProvider>
+            <HouseProvider>
+
             <MainNav />
+            </HouseProvider>
           </AuthProvider>
         </PaperProvider>
       </GestureHandlerRootView>
+      </>
     );
   } else {
     return (
