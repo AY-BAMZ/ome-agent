@@ -11,26 +11,34 @@ import {
 } from "react-native";
 import React, { createRef, useState } from "react";
 import { globalStyles } from "../../../styles/global";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { ScrollView, TouchableWithoutFeedback } from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
+import { useCreateApartmentContext } from "../../../api/apartments/CreateApartmentContext";
+import Loading from "../../Loadings/Loading";
 
 export default function CreateApartment() {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("");
   const [selectType, setSelectType] = useState("");
   const [bathrooms, setBathrooms] = useState("");
   const [bedrooms, setBedrooms] = useState("");
   const [toilets, setToilets] = useState("");
   const [size, setSize] = useState("");
+  const [availability, setAvailability] = useState(true);
   const [images, setImages] = useState([]);
 
   const categoryRef = createRef();
+  const descriptionRef = createRef();
   const selectTypeRef = createRef();
   const bathroomsRef = createRef();
   const bedroomsRef = createRef();
   const toiletsRef = createRef();
   const sizeRef = createRef();
+
+  const {handleCreateApartment} = useCreateApartmentContext()
+  const {isLoading} = useCreateApartmentContext()
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -54,8 +62,40 @@ export default function CreateApartment() {
     setImages([...images]);
   };
 
+  const formData = new FormData();
+  images.forEach((image) => {
+    formData.append("images", image);
+  });
+
+  const createApartment = () => {
+    if (title === "") {
+      setErrorMsg("title field cannot be empty");
+    } else if (category === "") {
+      setErrorMsg("category field cannot be empty");
+    } else {
+      handleCreateApartment({
+        title,
+        category,
+        price,
+        location,
+        description,
+        availability,
+        toilets,
+        size,
+        selectType,
+        formData,
+      });
+    }
+  };
+
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} nestedScrollEnabled = {true}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
@@ -89,6 +129,22 @@ export default function CreateApartment() {
             ref={categoryRef}
             keyboardType="text"
             onChangeText={(category) => setCategory(category)}
+            returnKeyType="next"
+            onSubmitEditing={() =>
+              descriptionRef.current && descriptionRef.current.focus()
+            }
+            blurOnSubmit={false}
+          />
+          <Text style={globalStyles.label}>Description</Text>
+          <TextInput
+            style={globalStyles.textarea}
+            placeholder="Enter your Category"
+            multiline={true}
+            value={description}
+            autoComplete="description"
+            ref={descriptionRef}
+            keyboardType="text"
+            onChangeText={(description) => setDescription(description)}
             returnKeyType="next"
             onSubmitEditing={() =>
               selectTypeRef.current && selectTypeRef.current.focus()
@@ -188,20 +244,31 @@ export default function CreateApartment() {
           />
         </View>
         <View style={styles.media}>
-          <TouchableOpacity style={globalStyles.button} onPress={pickImage}>
-            <Text style={globalStyles.buttonText}>Choose Image</Text>
+          <TouchableOpacity style={globalStyles.files} onPress={pickImage}>
+            <Ionicons name="cloud-upload-outline" size={32} color="#79007B" />
+            <Text style={globalStyles.filesText}>Upload Images</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.media}>
+          <TouchableOpacity
+            style={globalStyles.button}
+            onPress={createApartment}
+          >
+            <Text style={globalStyles.buttonText}>Create Apartment</Text>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignContent: "center",
+    // justifyContent: "center",
+    paddingTop: 50,
+    height: "100%",
+    // alignItems: "center",
     backgroundColor: "#fff",
   },
   body: {

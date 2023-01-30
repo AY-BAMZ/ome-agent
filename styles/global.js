@@ -188,4 +188,18 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: "#ddd",
     marginVertical: 12
   },
+  files: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: 120,
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: "#79007B",
+  },
+  filesText: {
+    fontFamily: "outfit-medium",
+    color: "#79007B",
+    fontSize: 18,
+  }
 });

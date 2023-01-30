@@ -73,7 +73,7 @@ export default function ProductPage({ route, navigation }) {
           <Ionicons name="md-location-outline" size={16} color="#777" />
           <Text style={styles.text}>{route.params.location}</Text>
         </View>
-        <Text style={styles.textTitle}>About Appartment</Text>
+        <Text style={styles.textTitle}>About apartment</Text>
         <Text style={styles.text}>{route.params.about}</Text>
         <View style={styles.hr}></View>
         <View style={styles.details}>
