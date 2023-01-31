@@ -8,6 +8,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import MainNav from "./routes/MainStack";
 import AuthProvider from "./api/auth/AuthContext";
 import HouseProvider from "./context/HouseContext";
+import CreateApartmentProvider from "./api/apartments/CreateApartmentContext";
 
 const getFonts = () =>
   Font.loadAsync({
@@ -27,16 +28,17 @@ export default function App() {
   if (fontsLoaded) {
     return (
       <>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <PaperProvider>
-          <AuthProvider>
-            <HouseProvider>
-
-            <MainNav />
-            </HouseProvider>
-          </AuthProvider>
-        </PaperProvider>
-      </GestureHandlerRootView>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <PaperProvider>
+            <AuthProvider>
+              <CreateApartmentProvider>
+                <HouseProvider>
+                  <MainNav />
+                </HouseProvider>
+              </CreateApartmentProvider>
+            </AuthProvider>
+          </PaperProvider>
+        </GestureHandlerRootView>
       </>
     );
   } else {

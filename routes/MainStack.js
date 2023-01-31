@@ -19,11 +19,11 @@ export default function MainNav() {
           headerShown: false,
         }}
       >
-          <Stack.Screen name="Home" component={TabStack} />
-          <Stack.Screen name="SignInStack" component={SignInStack} /> 
-        {/* {
+        {
           user === null ? 
-      } */}
+          <Stack.Screen name="SignInStack" component={SignInStack} /> :
+          <Stack.Screen name="Home" component={TabStack} /> 
+      }
       </Stack.Navigator>
     </NavigationContainer>
   );

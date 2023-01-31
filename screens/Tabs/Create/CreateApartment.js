@@ -26,6 +26,8 @@ export default function CreateApartment() {
   const [bedrooms, setBedrooms] = useState("");
   const [toilets, setToilets] = useState("");
   const [size, setSize] = useState("");
+  const [price, setPrice] = useState("");
+  const [location, setLocation] = useState("");
   const [availability, setAvailability] = useState(true);
   const [images, setImages] = useState([]);
 
@@ -36,6 +38,8 @@ export default function CreateApartment() {
   const bedroomsRef = createRef();
   const toiletsRef = createRef();
   const sizeRef = createRef();
+  const priceRef = createRef();
+  const locationRef = createRef();
 
   const {handleCreateApartment} = useCreateApartmentContext()
   const {isLoading} = useCreateApartmentContext()
@@ -83,6 +87,8 @@ export default function CreateApartment() {
         toilets,
         size,
         selectType,
+        bathrooms,
+        bedrooms,
         formData,
       });
     }
@@ -109,7 +115,7 @@ export default function CreateApartment() {
           <Text style={globalStyles.label}>Title</Text>
           <TextInput
             style={globalStyles.input}
-            placeholder="Enter your email"
+            placeholder="Enter a title"
             value={title}
             autoComplete="Title"
             keyboardType="text"
@@ -160,6 +166,36 @@ export default function CreateApartment() {
             autoComplete="text"
             keyboardType="text"
             onChangeText={(selectType) => setSelectType(selectType)}
+            returnKeyType="next"
+            onSubmitEditing={() =>
+              priceRef.current && priceRef.current.focus()
+            }
+            blurOnSubmit={false}
+          />
+          <Text style={globalStyles.label}>Price</Text>
+          <TextInput
+            style={globalStyles.input}
+            placeholder="Enter amount"
+            value={price}
+            ref={priceRef}
+            autoComplete="text"
+            keyboardType="text"
+            onChangeText={(price) => setPrice(price)}
+            returnKeyType="next"
+            onSubmitEditing={() =>
+              locationRef.current && locationRef.current.focus()
+            }
+            blurOnSubmit={false}
+          />
+          <Text style={globalStyles.label}>Location</Text>
+          <TextInput
+            style={globalStyles.input}
+            placeholder="Enter your location"
+            value={location}
+            ref={locationRef}
+            autoComplete="text"
+            keyboardType="text"
+            onChangeText={(location) => setLocation(location)}
             returnKeyType="next"
             onSubmitEditing={() =>
               bathroomsRef.current && bathroomsRef.current.focus()

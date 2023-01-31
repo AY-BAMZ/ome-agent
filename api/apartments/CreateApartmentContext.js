@@ -14,11 +14,13 @@ const CreateApartmentProvider = (props) => {
     category,
     price,
     location,
-    descriptions,
+    description,
     availability,
     toilets,
     size,
     selectType,
+    bathrooms,
+    bedrooms,
     formData,
   }) => {
     setIsLoading(true);
@@ -30,13 +32,14 @@ const CreateApartmentProvider = (props) => {
           category: category,
           price: price,
           location: location,
-          password2: confirmPassword,
-          descriptions: descriptions,
+          descriptions: description,
           is_available: availability,
           specifications: {
             toilets: toilets,
             size: size,
             selectType: selectType,
+            bathrooms: bathrooms,
+            bedrooms: bedrooms,
           },
         },
         {
