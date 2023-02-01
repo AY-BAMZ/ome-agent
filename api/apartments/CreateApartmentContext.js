@@ -13,7 +13,7 @@ const CreateApartmentProvider = (props) => {
     title,
     category,
     price,
-    location,
+    locality,
     description,
     availability,
     toilets,
@@ -21,6 +21,10 @@ const CreateApartmentProvider = (props) => {
     selectType,
     bathrooms,
     bedrooms,
+    // country,
+    states,
+    city,
+    street,
     formData,
   }) => {
     setIsLoading(true);
@@ -30,17 +34,21 @@ const CreateApartmentProvider = (props) => {
         {
           title: title,
           category: category,
+          _type: selectType,
           price: price,
-          location: location,
-          descriptions: description,
-          is_available: availability,
+          locality: locality,
+          // country: country,
+          state: states,
+          area: city,
+          street: street,
           specifications: {
             toilets: toilets,
             size: size,
-            selectType: selectType,
             bathrooms: bathrooms,
             bedrooms: bedrooms,
           },
+          descriptions: description,
+          is_available: availability,
         },
         {
           headers: {
@@ -48,8 +56,9 @@ const CreateApartmentProvider = (props) => {
           },
         }
       );
-      const appartmentId = response.id;
-      console.log("response", response);
+      const appartmentId = response.data.id;
+      console.log("response", appartmentId);
+      console.log(`${URI_MAP.ome.apartment}/${appartmentId}/pictures/`);
       // setUser(data.user);
       const secondRes = await axios.post(
         `${URI_MAP.ome.apartment}/${appartmentId}/pictures/`,

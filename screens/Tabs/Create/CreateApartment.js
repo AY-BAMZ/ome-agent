@@ -9,13 +9,14 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { createRef, useState } from "react";
+import React, { createRef, useEffect, useState } from "react";
 import { globalStyles } from "../../../styles/global";
 import { ScrollView, TouchableWithoutFeedback } from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import { useCreateApartmentContext } from "../../../api/apartments/CreateApartmentContext";
 import Loading from "../../Loadings/Loading";
+// import { Country, State, City }  from 'country-state-city';
 
 export default function CreateApartment() {
   const [title, setTitle] = useState("");
@@ -27,9 +28,17 @@ export default function CreateApartment() {
   const [toilets, setToilets] = useState("");
   const [size, setSize] = useState("");
   const [price, setPrice] = useState("");
-  const [location, setLocation] = useState("");
+  const [locality, setLocality] = useState("");
   const [availability, setAvailability] = useState(true);
   const [images, setImages] = useState([]);
+  // const [country, setCountry] = useState("");
+  const [states, setStates] = useState("");
+  const [city, setCity] = useState("");
+  const [street, setStreet] = useState("");
+
+  //   const countryList = Country.getAllCountries()
+  // console.log('countryList', countryList)
+
 
   const categoryRef = createRef();
   const descriptionRef = createRef();
@@ -39,7 +48,11 @@ export default function CreateApartment() {
   const toiletsRef = createRef();
   const sizeRef = createRef();
   const priceRef = createRef();
-  const locationRef = createRef();
+  const localityRef = createRef();
+  // const countryRef = createRef();
+  const statesRef = createRef();
+  const cityRef = createRef();
+  const streetRef = createRef();
 
   const {handleCreateApartment} = useCreateApartmentContext()
   const {isLoading} = useCreateApartmentContext()
@@ -81,7 +94,7 @@ export default function CreateApartment() {
         title,
         category,
         price,
-        location,
+        locality,
         description,
         availability,
         toilets,
@@ -89,11 +102,14 @@ export default function CreateApartment() {
         selectType,
         bathrooms,
         bedrooms,
+        // country,
+        states,
+        city,
+        street,
         formData,
       });
     }
   };
-
 
   if (isLoading) {
     return <Loading />;
@@ -183,19 +199,79 @@ export default function CreateApartment() {
             onChangeText={(price) => setPrice(price)}
             returnKeyType="next"
             onSubmitEditing={() =>
-              locationRef.current && locationRef.current.focus()
+              statesRef.current && statesRef.current.focus()
             }
             blurOnSubmit={false}
           />
-          <Text style={globalStyles.label}>Location</Text>
+          {/* <Text style={globalStyles.label}>Country</Text>
           <TextInput
             style={globalStyles.input}
-            placeholder="Enter your location"
-            value={location}
-            ref={locationRef}
+            placeholder="Enter your country"
+            value={country}
+            ref={countryRef}
             autoComplete="text"
             keyboardType="text"
-            onChangeText={(location) => setLocation(location)}
+            onChangeText={(country) => setCountry(country)}
+            returnKeyType="next"
+            onSubmitEditing={() =>
+              statesRef.current && statesRef.current.focus()
+            }
+            blurOnSubmit={false}
+          /> */}
+          <Text style={globalStyles.label}>State</Text>
+          <TextInput
+            style={globalStyles.input}
+            placeholder="Enter your state"
+            value={states}
+            ref={statesRef}
+            autoComplete="text"
+            keyboardType="text"
+            onChangeText={(states) => setStates(states)}
+            returnKeyType="next"
+            onSubmitEditing={() =>
+              cityRef.current && cityRef.current.focus()
+            }
+            blurOnSubmit={false}
+          />
+          <Text style={globalStyles.label}>City</Text>
+          <TextInput
+            style={globalStyles.input}
+            placeholder="Enter your city"
+            value={city}
+            ref={cityRef}
+            autoComplete="text"
+            keyboardType="text"
+            onChangeText={(city) => setCity(city)}
+            returnKeyType="next"
+            onSubmitEditing={() =>
+              streetRef.current && streetRef.current.focus()
+            }
+            blurOnSubmit={false}
+          />
+          <Text style={globalStyles.label}>Street Address</Text>
+          <TextInput
+            style={globalStyles.input}
+            placeholder="Enter your street address"
+            value={street}
+            ref={streetRef}
+            autoComplete="text"
+            keyboardType="text"
+            onChangeText={(street) => setStreet(street)}
+            returnKeyType="next"
+            onSubmitEditing={() =>
+              localityRef.current && localityRef.current.focus()
+            }
+            blurOnSubmit={false}
+          />
+          <Text style={globalStyles.label}>locality</Text>
+          <TextInput
+            style={globalStyles.input}
+            placeholder="Enter your locality"
+            value={locality}
+            ref={localityRef}
+            autoComplete="text"
+            keyboardType="text"
+            onChangeText={(locality) => setLocality(locality)}
             returnKeyType="next"
             onSubmitEditing={() =>
               bathroomsRef.current && bathroomsRef.current.focus()

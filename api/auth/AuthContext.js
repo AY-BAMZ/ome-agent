@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { createContext, useContext, useState } from "react";
 import URI_MAP from "../uri/URI_MAP";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export const AuthContext = createContext({});
 
 const AuthProvider = (props) => {
@@ -9,6 +9,13 @@ const AuthProvider = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [apiErrorMsg, setApiErrorMsg] = useState("");
 
+  const storeData = async (user) => {
+    try {
+      await AsyncStorage.setItem('@storage_Key', user.access_token)
+    } catch (e) {
+      // saving error
+    }
+  }
   //   sign up request
   const handleRegister = async ({
     firstName,
@@ -38,7 +45,7 @@ const AuthProvider = (props) => {
       );
       setIsLoading(false);
       const data = response.data;
-      setUser(data.user);
+      setUser(data);
       console.log("response", response.data);
     } catch (error) {
       console.log("error", error.response);
@@ -71,7 +78,7 @@ const AuthProvider = (props) => {
       );
       setIsLoading(false);
       const data = response.data;
-      setUser(data.user);
+      setUser(data);
       //   props.onLoggedIn(data);
       console.log("response", user);
     } catch (error) {
