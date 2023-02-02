@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { createContext, useContext, useState } from "react";
+import { useAuthContext } from "../auth/AuthContext";
 import URI_MAP from "../uri/URI_MAP";
 
 export const CreateApartmentContext = createContext({});
@@ -7,6 +8,14 @@ export const CreateApartmentContext = createContext({});
 const CreateApartmentProvider = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [apiErrorMsg, setApiErrorMsg] = useState("");
+
+  const {user} = useAuthContext()
+  const token = JSON.stringify(user.access_token )
+  // if (user.access_token !== null) {
+  //    return token = user.access_token
+  // } else {
+  //   return null
+  // }
 
   //   sign up request
   const handleCreateApartment = async ({
@@ -53,6 +62,7 @@ const CreateApartmentProvider = (props) => {
         {
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
           },
         }
       );
@@ -61,11 +71,12 @@ const CreateApartmentProvider = (props) => {
       console.log(`${URI_MAP.ome.apartment}/${appartmentId}/pictures/`);
       // setUser(data.user);
       const secondRes = await axios.post(
-        `${URI_MAP.ome.apartment}/${appartmentId}/pictures/`,
+        `${URI_MAP.ome.apartment}${appartmentId}/pictures/`,
         formData,
         {
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
           },
         }
       );
