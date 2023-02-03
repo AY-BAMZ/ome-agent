@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useAuthContext } from "../auth/AuthContext";
 import URI_MAP from "../uri/URI_MAP";
 
@@ -10,12 +10,18 @@ const CreateApartmentProvider = (props) => {
   const [apiErrorMsg, setApiErrorMsg] = useState("");
 
   const {user} = useAuthContext()
-  const token = JSON.stringify(user.access_token )
-  // if (user.access_token !== null) {
-  //    return token = user.access_token
-  // } else {
-  //   return null
-  // }
+
+  const [token, setToken] = useState("")
+  
+  useEffect(() => {
+    
+  if (user !== null) {
+    setToken(user.access_token)
+  } else {
+    setToken("")
+  }
+  }, [user])
+  
 
   //   sign up request
   const handleCreateApartment = async ({
