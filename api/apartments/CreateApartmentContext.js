@@ -74,7 +74,7 @@ const CreateApartmentProvider = (props) => {
       );
       const appartmentId = response.data.id;
       console.log("response", appartmentId);
-      console.log(`${URI_MAP.ome.apartment}/${appartmentId}/pictures/`);
+      console.log(`${URI_MAP.ome.apartment}${appartmentId}/pictures/`);
       // setUser(data.user);
       const secondRes = await axios.post(
         `${URI_MAP.ome.apartment}${appartmentId}/pictures/`,

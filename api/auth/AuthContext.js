@@ -46,7 +46,7 @@ const AuthProvider = (props) => {
       setIsLoading(false);
       const data = response.data;
       setUser(data);
-      console.log("response", response.data);
+      // console.log("response", response.data);
     } catch (error) {
       console.log("error", error.response);
       if (!err?.response) {

@@ -81,8 +81,9 @@ export default function CreateApartment() {
 
   const formData = new FormData();
   images.forEach((image) => {
-    formData.append("images", image);
+    formData.append(`image${images.indexOf(image)}`, image);
   });
+  console.log('formData', formData)
 
   const createApartment = () => {
     if (title === "") {
