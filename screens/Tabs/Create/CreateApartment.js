@@ -79,11 +79,11 @@ export default function CreateApartment() {
     setImages([...images]);
   };
 
-  const formData = new FormData();
-  images.forEach((image) => {
-    formData.append(`image${images.indexOf(image)}`, image);
-  });
-  console.log('formData', formData)
+  // const formData = new FormData();
+  // images.forEach((image) => {
+  //   formData.append(`image${images.indexOf(image)}`, image);
+  // });
+  // console.log('formData', formData)
 
   const createApartment = () => {
     if (title === "") {
@@ -107,7 +107,7 @@ export default function CreateApartment() {
         states,
         city,
         street,
-        formData,
+        images,
       });
     }
   };

@@ -80,7 +80,7 @@ const AuthProvider = (props) => {
       const data = response.data;
       setUser(data);
       //   props.onLoggedIn(data);
-      console.log("response", user);
+      // console.log("response", user);
     } catch (error) {
       console.log("error", error.response.data);
       setIsLoading(false);

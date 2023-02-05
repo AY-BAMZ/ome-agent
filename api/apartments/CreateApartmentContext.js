@@ -40,7 +40,7 @@ const CreateApartmentProvider = (props) => {
     states,
     city,
     street,
-    formData,
+    images,
   }) => {
     setIsLoading(true);
     try {
@@ -78,7 +78,7 @@ const CreateApartmentProvider = (props) => {
       // setUser(data.user);
       const secondRes = await axios.post(
         `${URI_MAP.ome.apartment}${appartmentId}/pictures/`,
-        formData,
+        {image: images},
         {
           headers: {
             "Content-Type": "application/json",
